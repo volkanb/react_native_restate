@@ -264,7 +264,8 @@ const Property = () => {
               numberOfLines={1}
               className='text-primary-300 text-start text-2xl font-rubik-bold'
             >
-              ${property?.price}
+              $
+              {property?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
             </Text>
           </View>
 
