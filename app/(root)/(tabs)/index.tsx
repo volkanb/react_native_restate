@@ -3,6 +3,7 @@ import Filters from '@/components/Filters';
 import NoResults from '@/components/NoResults';
 import Search from '@/components/Search';
 import icons from '@/constants/icons';
+import images from '@/constants/images';
 import { getLatestProperties, getProperties } from '@/lib/appwrite';
 import { useGlobalContext } from '@/lib/global-provider';
 import { useAppwrite } from '@/lib/useAppwrite';
@@ -75,7 +76,7 @@ export default function Index() {
             <View className='flex flex-row items-center justify-between mt-5'>
               <View className='flex flex-row items-center'>
                 <Image
-                  source={{ uri: user?.avatar }}
+                  source={user?.name ? { uri: user?.avatar } : images.avatar}
                   className='size-12 rounded-full'
                 />
                 <View className='flex flex-col items-start ml-2 justify-center'>
@@ -83,7 +84,7 @@ export default function Index() {
                     Good Morning
                   </Text>
                   <Text className='text-base font-rubik-medium text-black-300'>
-                    {user?.name}
+                    {user?.name ? user?.name : 'Guest User'}
                   </Text>
                 </View>
               </View>

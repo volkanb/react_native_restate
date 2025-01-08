@@ -11,7 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import images from '@/constants/images';
 import icons from '@/constants/icons';
-import { login } from '@/lib/appwrite';
+import { login, loginAsGuest } from '@/lib/appwrite';
 import { useGlobalContext } from '@/lib/global-provider';
 import { Redirect } from 'expo-router';
 
@@ -29,6 +29,16 @@ const SignIn = () => {
       Alert.alert('Error', 'Failed to login');
     }
     console.log('Login pressed');
+  };
+
+  const handleGuestLogin = async () => {
+    const result = await loginAsGuest();
+
+    if (result) {
+      refetch();
+    } else {
+      Alert.alert('Error', 'Failed to login as guest');
+    }
   };
 
   return (
@@ -50,9 +60,9 @@ const SignIn = () => {
             <Text className='text-primary-300'>Your Ideal Home</Text>
           </Text>
 
-          <Text className='text-lg font-rubik text-black-200 text-center mt-12'>
+          {/* <Text className='text-lg font-rubik text-black-200 text-center mt-12'>
             Login to ReState with Google
-          </Text>
+          </Text> */}
 
           <TouchableOpacity
             onPress={handleLogin}
@@ -68,6 +78,15 @@ const SignIn = () => {
                 Continue with Google
               </Text>
             </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={handleGuestLogin}
+            className='bg-primary-200 rounded-full w-full py-4 mt-4'
+          >
+            <Text className='text-lg font-rubik-medium text-primary-300 text-center'>
+              Continue as Guest
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

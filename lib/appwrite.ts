@@ -55,6 +55,19 @@ export async function login() {
   }
 }
 
+export async function loginAsGuest() {
+  try {
+    const response = await account.createAnonymousSession();
+
+    if (!response) throw new Error('Failed to create anonymous session');
+
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
 export async function logout() {
   try {
     await account.deleteSession('current');
